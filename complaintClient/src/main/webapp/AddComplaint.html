@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<form method="get" action="AddComplaint.jsp">
+	<center>
+		Complaint No :
+		<input type="number" name="ComplaintID" /> <br/><br/>
+		ComplaintType : 
+		<input type="text" name="ComplaintType" /> <br/><br/> 
+		CDescription :
+		<input type="text" name="CDescription" /> <br/><br/> 
+		ComplaintDate :
+		<input type="date" name="ComplaintDate" /> <br/><br/>
+		Severity : 
+		<input type="text" name="Severity" /> <br/><br/> 
+		Status : 
+		<select name="Status">
+			<option value="Pending">Pending</option>
+			<option value="Approved">Approved"</option>
+		</select> <br/><br/>
+		<input type="submit" value="Insert" />
+	</center>
+</body>
+</html>

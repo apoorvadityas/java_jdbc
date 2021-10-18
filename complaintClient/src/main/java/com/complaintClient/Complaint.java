@@ -26,8 +26,8 @@ public class Complaint {
 	public String getCDescription() {
 		return CDescription;
 	}
-	public void setCDescription(String cDescription) {
-		CDescription = cDescription;
+	public void setCDescription(String CDescription) {
+		this.CDescription = CDescription;
 	}
 	public Date getComplaintDate() {
 		return ComplaintDate;
