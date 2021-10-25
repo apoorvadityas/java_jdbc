@@ -1,10 +1,10 @@
 package com.OyoRooms.model;
 import java.sql.Date;
-
+import com.OyoRooms.model.RoomID;
 
 public class Booking {
 	private int BookId ;
-	  private int RoomID ;
+	  private RoomID RoomID ;
 	  private String CustName ;
 	  private String City ;
 	  private Date BookDate;
@@ -16,10 +16,11 @@ public class Booking {
 	public void setBookId(int bookId) {
 		this.BookId = bookId;
 	}
-	public int getRoomID() {
+
+	public RoomID getRoomID() {
 		return RoomID;
 	}
-	public void setRoomID(int roomID) {
+	public void setRoomID(RoomID roomID) {
 		RoomID = roomID;
 	}
 	public String getCustName() {

@@ -12,12 +12,14 @@
        <div align="center">
             <h1>Rooms</h1>
             <h3><a href="newroom">New Room</a></h3>
+            <h3><a href="newbook">New Booking</a></h3>
             <table border="1">
             <tr>
                 <th> Room No</th>
                <th>Type</th>
                <th>Status</th>
                <th>CostPerDay</th>
+               <th>Book A Room</th>
              
                 <c:forEach var="room" items="${listroom}" varStatus="status">
                 <tr>
@@ -28,9 +30,9 @@
                 
               
                      <td>
-                        <a href="">Edit</a>
+                        <a href="roombook">Book</a>
                         &nbsp;&nbsp;&nbsp;&nbsp;
-                        <a href="">Delete</a>
+                        
                     </td>
                 </tr>
                 </c:forEach>             

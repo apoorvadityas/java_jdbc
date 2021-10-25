@@ -13,6 +13,7 @@ import org.springframework.jdbc.core.RowMapper;
 
 import com.OyoRooms.model.Booking;
 import com.OyoRooms.model.Room;
+import com.OyoRooms.model.RoomID;
 import com.OyoRooms.model.Status;
 
 
@@ -42,19 +43,24 @@ public class BookingDAOImpl implements BookingDAO {
 		    	    return listContact;
 
 		    	}
+		
 
 	    
 	    @Override
 		public void addRoom(Room room) {
-			String cmd = "Insert into Room(RoomID,Type,Status,CostPerDay) values(?,?,?,?)";
-			 jdbcTemplate.update(cmd,room.getRoomID(),room.getType(),room.getStatus(),room.getCostPerDay());
-					 
+			String cmd = "Insert into Room( BookId,,Status,CostPerDay) values(?,?,?,?)";
+			 jdbcTemplate.update(cmd,room.getRoomID(),room.getType(),room.getStatus().toString(),room.getCostPerDay());
+			 
 			
 		}
 
 		@Override
 		public void addBooking(Booking booking) {
-			// TODO Auto-generated method stub
+			String cmd = "Insert into Booking(BookId,RoomID,CustName,City,BookDate,ChkInDate,ChkOutDate) values(?,?,?,?,?,?,?)";
+			 jdbcTemplate.update(cmd,booking.getBookId(),booking.getRoomID().toString(),booking.getCustName(),booking.getCity(),booking.getBookDate(),booking.getChkInDate(),booking.getChkOutDate());
+					 
+			
+		
 			
 		}
 
@@ -86,5 +92,27 @@ public class BookingDAOImpl implements BookingDAO {
 		        }
 		        });
 		    }
-		}
-	
+
+		@Override
+		public List<Booking> list1() {
+			
+			String sql = "SELECT * FROM Booking";
+		    List<Booking> listContacts = jdbcTemplate.query(sql, new RowMapper<Booking>() {
+		        @Override
+		        public Booking mapRow(ResultSet rs, int rowNum) throws SQLException {
+		            Booking book = new Booking();
+		            book.setBookId(rs.getInt("BooKID"));
+		     	  book.setRoomID(RoomID.valueOf(rs.getString("RoomID")));
+				  book.setCustName(rs.getString("CustName"));
+				  book.setCity(rs.getString("City"));
+				  book.setBookDate(rs.getDate("BookDate"));
+				  book.setChkInDate(rs.getDate("ChkInDate"));
+				  book.setChkOutDate(rs.getDate("ChkOutDate"));
+			
+					return book;
+		    	}
+		    	    });
+		    	    return listContacts;
+
+		    	}
+}

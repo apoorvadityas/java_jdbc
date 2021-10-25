@@ -88,7 +88,7 @@
 	</repositories>
 
 	<build>
-		<finalName>SpringMvcEmployExample</finalName>
+		<finalName>OyoRooms</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
