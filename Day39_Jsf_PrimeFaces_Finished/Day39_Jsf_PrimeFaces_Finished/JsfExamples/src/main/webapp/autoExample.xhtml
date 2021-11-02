@@ -1,0 +1,16 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+ xmlns:p="http://primefaces.org/ui"  
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+		<h:head>  
+<title>AutoComplete</title>  
+</h:head>  
+<h:body>  
+<h3>PrimeFaces AutoComplete Example</h3>  
+	<h:form>  
+	<p:outputLabel value="Provide Name: " />  
+<p:autoComplete value="#{autoExample.studentName}" maxResults="4" completeMethod="#{autoExample.students()}" />
+	</h:form>
+</h:body>
+</html>
