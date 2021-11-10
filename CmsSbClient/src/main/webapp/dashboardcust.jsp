@@ -18,7 +18,7 @@
 	</div>
 
 	<div class="atwo">
-	<a href="pendingorders.jsp">Pending Orders</a>
+	<a href="pendingorders.html">Pending Orders</a>
 	</div>
 	
 	<div class="atwo">

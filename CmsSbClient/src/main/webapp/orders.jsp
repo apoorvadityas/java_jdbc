@@ -13,10 +13,24 @@
 <title>Insert title here</title>
 </head>
 <body>
+<table border="3">
+<tr>
+	<th>Order Id</th>
+	<th>Customer Id</th>
+	<th>Vendor Id</th>
+	<th>Wallet Source</th>
+	<th>Menu Id</th>
+	<th>Order Date</th>
+	<th>Order Quantity</th>
+	<th>Order Bill Amount</th>
+	<th>Order Status</th>
+	
+	
+	
+</tr>
+
 <%
-		int a = Integer.parseInt(request.getParameter("CustId"));
-           out.println(a);
-		 URL url = new URL("http://localhost:1111/customer/"+a);
+		 URL url = new URL("http://localhost:1111/showorders");
 	        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 	        conn.setRequestMethod("GET");
 	        conn.setRequestProperty("Accept", "application/json");
@@ -33,16 +47,33 @@
 	        String res="";
 	        while ((output = br.readLine()) != null) {
 	        	res+=output;
-	            //out.println(output);
+	         //  out.println(output);
+	            
 	        }
-	       // out.println(res);
-	      customer cust = new ObjectMapper().readValue(res, customer.class);
-	    out.println("customer ID  " +cust.getCusId() + "<br/>");
-	    out.println("Customer Name " +cust.getCusName() + "<br/>");
-	    out.println("Customer Phone Number  " +cust.getCusPhnNo() + "<br/>"); 
-	    out.println("Customer Username  " +cust.getCusUsername() + "<br/>");
-	    out.println("Customer Password  " +cust.getCusPassword() + "<br/>");
-	    out.println("Customer Email  " +cust.getCusEmail() + "<br/>");
+	        ObjectMapper objectMapper = new ObjectMapper();
+	        Orders[] order = objectMapper.readValue(res, Orders[].class);
+	      //  out.println(employ.length);
+
+	        for(Orders o : order) {
+  %>
+  	<tr>
+  		<td> <%=o.getOrdId() %> </td>
+  		<td> <%=o.getCusId() %> </td>
+  		<td> <%=o.getVenId() %> </td>
+  		<td> <%=o.getWalSource() %> </td>
+  		<td> <%=o.getMenId() %> </td>
+  		<td> <%=o.getOrdDate() %> </td>
+  		<td> <%=o.getOrdQuantity() %></td>
+  		<td> <%=o.getOrdBillamount() %></td>
+  		<td> <%=o.getOrdStatus() %></td>
+  	
+  		
+  	</tr>
+  <%
+	       	
+	        }
+	     // out.println(res);
 	  %>
+	  </table>
 </body>
 </html>

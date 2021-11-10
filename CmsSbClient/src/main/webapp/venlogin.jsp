@@ -1,5 +1,4 @@
 <%@page import="com.CmsSbClient.*"%>
-<%@page import="org.codehaus.jackson.map.ObjectMapper"%>
 <%@page import="java.io.InputStreamReader"%>
 <%@page import="java.io.BufferedReader"%>
 <%@page import="java.net.HttpURLConnection"%>
@@ -14,9 +13,9 @@
 </head>
 <body>
 <%
-		int a = Integer.parseInt(request.getParameter("CustId"));
-           out.println(a);
-		 URL url = new URL("http://localhost:1111/customer/"+a);
+		String a = request.getParameter("venUsername");
+		String b= request.getParameter("venPassword");
+		 URL url = new URL("http://localhost:1111/vendorAuthenticate/"+a+"/"+b);
 	        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 	        conn.setRequestMethod("GET");
 	        conn.setRequestProperty("Accept", "application/json");
@@ -29,20 +28,25 @@
 	        BufferedReader br = new BufferedReader(new InputStreamReader(
 	            (conn.getInputStream())));
 
-	        String output;
-	        String res="";
-	        while ((output = br.readLine()) != null) {
-	        	res+=output;
-	            //out.println(output);
+	        
+	        
+	        if(br.read() != '0') {
+	        	
+	        	out.println("login successful,");
+	        	
+	        	%>
+	        	<jsp:include page="dashboardvendor.jsp"></jsp:include>
+	        	<%
+	        	
 	        }
-	       // out.println(res);
-	      customer cust = new ObjectMapper().readValue(res, customer.class);
-	    out.println("customer ID  " +cust.getCusId() + "<br/>");
-	    out.println("Customer Name " +cust.getCusName() + "<br/>");
-	    out.println("Customer Phone Number  " +cust.getCusPhnNo() + "<br/>"); 
-	    out.println("Customer Username  " +cust.getCusUsername() + "<br/>");
-	    out.println("Customer Password  " +cust.getCusPassword() + "<br/>");
-	    out.println("Customer Email  " +cust.getCusEmail() + "<br/>");
+	        else {
+	        	
+	        	
+	        	%>
+	        	<jsp:include page="venlogin.html"></jsp:include>
+	        	<%
+	        }
+	    
 	  %>
 </body>
 </html>
