@@ -1,0 +1,89 @@
+import { useEffect, useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import ManagerService from '../services/Manager.service';
+import employeeService from '../services/employee.service';
+import ReadOnlyRow from "./components/ReadOnlyRow";
+import EditableRow from "./components/EditableRow";
+
+
+const ManagerList = () => {
+    const [manager, setManager] = useState([]);
+    const init = () => {
+        ManagerService.getAll()
+          .then(response => {
+            console.log('Printing manager data', response.data);
+            setManager(response.data);
+          })
+          .catch(error => {
+            console.log('Something went wrong', error);
+          }) 
+      }
+    
+      useEffect(() => {
+        init();
+      }, []);
+
+      const handleDelete = (id) => {
+        console.log('Printing id', id);
+        employeeService.remove(id)
+          .then(response => {
+            console.log('manager deleted successfully', response.data);
+            init();
+          })
+          .catch(error => {
+            console.log('Something went wrong', error);
+          })
+      }
+
+  return (
+    <div className="container">
+      <h3>Managers List</h3>
+      <hr/>
+      <div>
+        <Link to="" className="btn btn-primary mb-2">Add Manager</Link>
+        <table className="table table-bordered table-striped">
+          <thead className="thead-dark">
+            <tr>
+              
+              <th>Manager Name</th>
+              <th>Employee ID</th>
+              <th>Employee Name</th>
+              <th>Manager Gender</th>
+              <th>Manager Department</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+          {
+              
+            manager.map(mgr => (
+              <tr key={mgr.mgrid}>
+                <td>{mgr.mgrname}</td>
+                <td>{mgr.id}</td>
+                <td>{mgr.name}</td>
+                <td>{mgr.gender}</td>
+                <td>{mgr.dept}</td>
+                <td>
+                  <Link className="btn btn-info" to={`/manager/edit/${mgr.mgrid}`}>Update</Link>
+                  
+                  <button className="btn btn-danger ml-2" onClick={() => {
+                    if(window.confirm('Are you sure?')){
+                      handleDelete(mgr.mgrid);
+                    }
+                    
+                  }}>Delete</button>
+                </td>
+              </tr>
+            ))
+            
+          }
+          
+          </tbody>
+        </table>
+        
+      </div>
+    </div>
+  );
+}
+
+export default ManagerList;

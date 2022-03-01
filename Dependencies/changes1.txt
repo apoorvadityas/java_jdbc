@@ -1,0 +1,10 @@
+ @Query("SELECT e FROM tbl_employees e WHERE e.name LIKE %?1%"
+	            + " OR e.id LIKE %?1%")
+	    public List<Employee> search(String keyword);
+@Query("SELECT e FROM Employ e WHERE e.name LIKE %?1%"
+	            + " OR e.id LIKE %?1%")
+
+http://localhost:8080/employees
+
+public void deleteById(int id);
+<Route path="*" component={NotFound} />

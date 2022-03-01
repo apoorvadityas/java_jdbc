@@ -1,0 +1,22 @@
+@RequestMapping("/employ/{empno}")
+	  public Employ show(@PathVariable int empno) {
+			return service.search(empno);
+	}
+
+
+
+@RequestMapping(value="/")
+	public List<Employ> list() {
+		return service.listAll();
+	}
+
+public List<Employ> searchByname(String nm);
+
+public List<Employ> searchByname(String nm) {
+		return repo.searchByname(nm);
+	}
+
+@RequestMapping("/name/{nm}")
+	public List<Employ> listByName(@PathVariable String nm) {
+		return service.searchByname(nm);
+	}
